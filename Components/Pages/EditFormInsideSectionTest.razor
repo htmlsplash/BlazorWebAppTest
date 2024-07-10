@@ -1,0 +1,34 @@
+﻿@page "/EditFormInsideSectionTest"
+
+@rendermode InteractiveServer
+
+
+<h3>EditForm Inside Section Content Test</h3>
+
+
+<SectionContent SectionName="sidebar">
+	<EditForm Model="ClientCriteria" OnSubmit="OnSubmitCallback">
+		Client #:<InputText @bind-Value="ClientCriteria.ClientNumber" class="form-control" /><br />
+		Client Name:<InputText @bind-Value="ClientCriteria.ClientName" class="form-control" /><br />
+		<button class="btn btn-primary">Search</button>
+		<button class="btn btn-secondary" type="reset">Reset</button>
+	</EditForm>
+</SectionContent>
+
+@code {
+	public ClientSearchCriteria ClientCriteria { get; set; } = new();
+
+	public void OnSubmitCallback()
+	{
+		Console.WriteLine($"Client #={ClientCriteria.ClientNumber}");
+		Console.WriteLine($"Client Name={ClientCriteria.ClientName}");
+	}
+
+	public class ClientSearchCriteria
+	{
+		public string ClientNumber { get; set; }
+		public string ClientName { get; set; }
+		
+	}
+
+}
