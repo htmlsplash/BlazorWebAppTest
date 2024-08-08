@@ -1,0 +1,35 @@
+﻿@page "/ComponentInsideSectionTest"
+
+@rendermode InteractiveServer
+
+
+<h3>Toggle component Inside Section Test</h3>
+
+
+<SectionContent SectionName="sidebar">
+	@if (_toggleSearchMode)
+	{
+		<button @onclick=ToggleSearchModeUI type="button" class="btn btn-secondary">
+			<span>Advanced Search</span>
+			
+		</button>
+	}
+	else
+	{
+		<button @onclick=ToggleSearchModeUI type="button" class="btn btn-secondary">
+			<span>Basic Search</span>
+			
+		</button>
+	}
+
+</SectionContent>
+
+
+@code {
+	private bool _toggleSearchMode = true;
+
+	private void ToggleSearchModeUI()
+	{
+		_toggleSearchMode = !_toggleSearchMode;
+	}
+}
