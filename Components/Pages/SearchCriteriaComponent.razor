@@ -1,0 +1,39 @@
+﻿@using BlazorWebAppTest.Code
+
+
+
+<EditForm Model="Criteria" OnValidSubmit="OnSubmitCallback"
+		  FormName="search-frm">
+
+
+	Input select:
+	<InputSelect class="form-control" @bind-Value=Criteria.SomeId>
+		<option value="" selected>All</option>
+
+	</InputSelect><br />
+
+	Filter 1:<InputText @bind-Value="Criteria.Filter1" class="form-control" /><br />
+	Filter 2:<InputText @bind-Value="Criteria.InnerCriteria.Filter2" class="form-control" /><br />
+
+
+	<button class="btn btn-primary">Search</button>
+
+</EditForm>
+
+
+@code {
+	[SupplyParameterFromForm(FormName = "search-frm")]
+	public OuterCriteria Criteria { get; set; } //= new();
+
+	protected override void OnInitialized()
+	{
+		Criteria ??= new();
+	}
+
+	public void OnSubmitCallback()
+	{
+		Console.WriteLine($"Filter 1={Criteria.Filter1}");
+		Console.WriteLine($"Inner criteria, Filter 2={Criteria?.InnerCriteria.Filter2}");
+	}
+
+}
