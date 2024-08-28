@@ -1,0 +1,16 @@
+﻿@page "/MissingContent"
+
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+
+<SectionContent SectionName="sidebar">
+	<Component1 @rendermode=InteractiveServer></Component1>
+</SectionContent>
+
+<h3>Missing Content Demo</h3>
+
+<p>This content shows up fine but the content in the section never gets rendered if this page turns
+	off pre-rendering.</p>
+
+@code {
+
+}
