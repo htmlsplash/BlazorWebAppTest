@@ -47,6 +47,10 @@
 		if (end is { })
 			Console.WriteLine(end);
 
+		if (c.Start is { })
+			Console.WriteLine(c.Start);
+		if (c.End is { })
+			Console.WriteLine(c.End);
 	}
 
 
@@ -54,13 +58,17 @@
 	{
 		public DateTime? Start { get; set; }
 		public DateTime? End { get; set; }
-		
+
 
 	}
 
 	public class SomeCriteria
 	{
 		public Period Period { get; set; } = new();
-		
+
+		// Binding to these directly, individually works!
+		public DateTime? Start { get; set; }
+		public DateTime? End { get; set; }
+
 	}
 }
