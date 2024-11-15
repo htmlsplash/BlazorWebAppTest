@@ -1,0 +1,66 @@
+﻿@page "/form-test1"
+
+<h3>Form DataBind Test1</h3>
+
+
+<EditForm Model="CriteriaFromUserInput" OnValidSubmit="OnCriteriaSubmitted" FormName="criteria-input">
+
+	<div class="row">
+		<div class="col-md-3">
+			<label for="startDate">Start Date</label>
+			<InputDate class="form-control" @bind-Value="CriteriaFromUserInput.Period.Start" />
+		</div>
+		<div class="col-md-3">
+			<label for="endDate">End Date</label>
+			<InputDate class="form-control" @bind-Value="CriteriaFromUserInput.Period.End" />
+		</div>
+
+
+		<div class="row mt-2">
+			<div class="col-auto">
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</div>
+		</div>
+	</div>
+</EditForm>
+
+@code {
+	[SupplyParameterFromForm(FormName = "criteria-input")]
+	private SomeCriteria CriteriaFromUserInput { get; set; }
+
+	protected override void OnInitialized()
+	{
+		base.OnInitialized();
+
+		CriteriaFromUserInput ??= new();
+	}
+
+	private void OnCriteriaSubmitted()
+	{
+		var c = CriteriaFromUserInput;
+
+		// read the form fields
+		var start = c.Period?.Start;
+		var end = c.Period?.End;
+		if (start is { })
+			Console.WriteLine(start);
+		if (end is { })
+			Console.WriteLine(end);
+
+	}
+
+
+	public class Period
+	{
+		public DateTime? Start { get; set; }
+		public DateTime? End { get; set; }
+		
+
+	}
+
+	public class SomeCriteria
+	{
+		public Period Period { get; set; } = new();
+		
+	}
+}
