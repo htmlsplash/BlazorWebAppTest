@@ -1,0 +1,25 @@
+﻿@page "/nav-test1"
+
+
+<h3>Nav Test1</h3>
+Open browser dev tools console to view the console trace from Java Script.
+When you navigate to this page for the first time you should see the logged message (see JS functions below).
+
+
+<SectionContent SectionName="post_js">
+	<script>
+		Blazor.addEventListener('enhancedload', () => {
+			console.log('enhancedload!');
+			
+		});
+
+		document.addEventListener('DOMContentLoaded', function() {
+
+			console.log('Document is fully loaded!');
+			
+		});
+	</script>
+</SectionContent>
+@code {
+
+}
