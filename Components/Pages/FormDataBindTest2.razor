@@ -1,4 +1,5 @@
 ﻿@page "/form-test2"
+@using System.Runtime.Serialization
 
 <h3>Form DataBind Test2</h3>
 
@@ -30,6 +31,8 @@
 </EditForm>
 
 @code {
+
+	private IEnumerable<int> values = Enumerable.Range(0, 5);
 	[SupplyParameterFromForm(FormName = "user-input")]
 	private SomeModel Model { get; set; }
 
@@ -59,7 +62,9 @@
 
 	public class SomeModel
 	{
+		[IgnoreDataMember]
 		public NestedModel Nested { get; set; } //= new();
+
 
 		public SomeModel()
 		{
@@ -72,7 +77,9 @@
 
 			set
 			{
-				if (Nested.InternalModel is null) // Nested is null, why?
+				// Nested is null, why? 
+				// Because Blazor binds to all pub properties and values that are not in the form are set to default value=null by default
+				if (Nested.InternalModel is null) 
 					Nested.InternalModel = new();
 				Nested.InternalModel.StrField = value;
 			}
@@ -84,7 +91,9 @@
 
 			set
 			{
-				if (Nested.InternalModel is null) // Nested is null, why?
+				// Nested is null, why?
+				// Because Blazor binds to all pub properties and values that are not in the form are set to default value=null by default
+				if (Nested.InternalModel is null)
 					Nested.InternalModel = new();
 				Nested.InternalModel.IntField = value;
 			}
